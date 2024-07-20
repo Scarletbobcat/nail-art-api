@@ -9,7 +9,7 @@ import lombok.Generated;
 @Table(name = "Employees")
 public class Employee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMPLOYEE_ID")
     private int employeeID;
 
