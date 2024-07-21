@@ -20,7 +20,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/test/{id}")
+    @GetMapping("/Employees/{id}")
     public Employee findEmployeeById(@PathVariable int id) throws Exception {
         Employee employee = employeeService.getEmployeeById(id);
         if (employee != null) {
@@ -29,14 +29,14 @@ public class EmployeeController {
         throw new ClassNotFoundException("Employee not found");
     }
 
-    @GetMapping("/test")
+    @GetMapping("/Employees")
     public List<Employee> findAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
 
         return employees;
     }
 
-    @GetMapping("Employee/Create")
+    @GetMapping("Employees/Create")
     public void createEmployee(@RequestBody Employee employee) {
         employeeService.createEmployee(employee);
     }
