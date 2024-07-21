@@ -4,6 +4,7 @@ import com.nail_art.appointment_book.Models.Employee;
 import com.nail_art.appointment_book.Repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,4 +20,10 @@ public class EmployeeService {
 
         return employee.orElse(null);
     }
+
+    public List<Employee> getAllEmployees() {
+
+        return employeeRepository.findAll();
+    }
+
 }

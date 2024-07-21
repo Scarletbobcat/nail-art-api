@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,11 +21,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/test/{id}")
-    public String index(@PathVariable int id) {
+    public Employee findEmployeeById(@PathVariable int id) throws Exception {
         Employee employee = employeeService.getEmployeeById(id);
         if (employee != null) {
-            return "Hello, " + employee.getEmployeeName();
+            return employee;
         }
-        return "Employee not found";
+        throw new ClassNotFoundException("Employee not found");
+    }
+
+    @GetMapping("/test")
+    public List<Employee> findAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+
+        return employees;
     }
 }
