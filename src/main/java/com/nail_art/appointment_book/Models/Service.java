@@ -9,9 +9,9 @@ import lombok.Data;
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SERVICES_ID")
-    private int servicesId;
+    @Column(name = "serviceId")
+    private int serviceID;
 
-    @Column(name = "SERVICE_NAME")
+    @Column(name = "serviceName")
     private String serviceName;
 }

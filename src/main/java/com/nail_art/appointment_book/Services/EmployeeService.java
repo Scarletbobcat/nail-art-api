@@ -26,4 +26,8 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public void createEmployee(Employee employee) {
+        System.out.println(employee);
+        employeeRepository.save(employee);
+    }
 }

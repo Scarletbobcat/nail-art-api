@@ -35,4 +35,9 @@ public class EmployeeController {
 
         return employees;
     }
+
+    @GetMapping("Employee/Create")
+    public void createEmployee(@RequestBody Employee employee) {
+        employeeService.createEmployee(employee);
+    }
 }
