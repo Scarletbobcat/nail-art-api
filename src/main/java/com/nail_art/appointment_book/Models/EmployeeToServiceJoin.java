@@ -13,10 +13,10 @@ public class EmployeeToServiceJoin {
     private int id;
 
     @ManyToOne
-    @Column(name = "EMPLOYEE_ID")
+    @JoinColumn(name = "EMPLOYEE_ID")
     private Employee employeeID;
 
     @ManyToOne
-    @Column(name = "SERVICE_ID")
+    @JoinColumn(name = "SERVICE_ID")
     private Service serviceID;
 }
