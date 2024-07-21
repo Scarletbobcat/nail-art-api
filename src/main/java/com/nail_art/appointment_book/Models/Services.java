@@ -1,4 +1,4 @@
-package com.nail_art.appointment_book;
+package com.nail_art.appointment_book.Models;
 
 import jakarta.persistence.*;
 import lombok.Data;
