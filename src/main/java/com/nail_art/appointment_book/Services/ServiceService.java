@@ -26,4 +26,8 @@ public class ServiceService {
     public void createService(com.nail_art.appointment_book.Models.Service service) {
         serviceRepository.save(service);
     }
+
+    public void deleteServiceById(int id) {
+        serviceRepository.deleteById(id);
+    }
 }

@@ -34,4 +34,10 @@ public class ServiceController {
     public void createService(@RequestBody Service service){
         serviceService.createService(service);
     }
+
+    @DeleteMapping("Services/Delete/{id}")
+    public void deleteService(@PathVariable int id){
+        serviceService.deleteServiceById(id);
+    }
+
 }
