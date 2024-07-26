@@ -2,6 +2,7 @@ package com.nail_art.appointment_book.Services;
 
 import com.nail_art.appointment_book.Models.Employee;
 import com.nail_art.appointment_book.Repositories.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,14 +12,13 @@ import java.util.Optional;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+    @Autowired
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
     public Employee getEmployeeById(int id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-
-        return employee.orElse(null);
+        return employeeRepository.findById(id).orElse(null);
     }
 
     public List<Employee> getAllEmployees() {

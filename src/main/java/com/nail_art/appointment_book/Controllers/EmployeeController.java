@@ -3,13 +3,9 @@ package com.nail_art.appointment_book.Controllers;
 import com.nail_art.appointment_book.Models.Employee;
 import com.nail_art.appointment_book.Services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EmployeeController {
@@ -21,7 +17,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/Employees/{id}")
-    public Employee findEmployeeById(@PathVariable int id) throws Exception {
+    public Employee getEmployeeById(@PathVariable int id) throws Exception {
         Employee employee = employeeService.getEmployeeById(id);
         if (employee != null) {
             return employee;
@@ -30,13 +26,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/Employees")
-    public List<Employee> findAllEmployees() {
+    public List<Employee> getAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
 
         return employees;
     }
 
-    @GetMapping("Employees/Create")
+    @PostMapping("Employees/Create")
     public void createEmployee(@RequestBody Employee employee) {
         employeeService.createEmployee(employee);
     }
