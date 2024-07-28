@@ -16,7 +16,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @GetMapping("/Services/{id}")
+    @GetMapping("/Appointments/{id}")
     public Appointment getApppointmentById(@PathVariable int id) throws Exception {
         Appointment appointment = appointmentService.getAppointmentById(id);
         if (appointment != null) {
@@ -25,17 +25,17 @@ public class AppointmentController {
         throw new ClassNotFoundException("Appointment not found");
     }
 
-    @GetMapping("/Services")
+    @GetMapping("/Appointments")
     public List<Appointment> getAllServices() {
         return appointmentService.getAllAppointments();
     }
 
-    @PostMapping("Services/Create")
+    @PostMapping("Appointments/Create")
     public void createService(@RequestBody Appointment appointment){
         appointmentService.createAppointment(appointment);
     }
 
-    @DeleteMapping("Services/Delete/{id}")
+    @DeleteMapping("Appointments/Delete/{id}")
     public void deleteService(@PathVariable int id){
         appointmentService.deleteAppointmentById(id);
     }
