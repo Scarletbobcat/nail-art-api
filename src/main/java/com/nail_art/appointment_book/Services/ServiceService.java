@@ -19,7 +19,7 @@ public class ServiceService {
         return serviceRepository.findById(id).orElse(null);
     }
 
-    public List<com.nail_art.appointment_book.Models.Service> getAll() {
+    public List<com.nail_art.appointment_book.Models.Service> getAllServices() {
         return serviceRepository.findAll();
     }
 

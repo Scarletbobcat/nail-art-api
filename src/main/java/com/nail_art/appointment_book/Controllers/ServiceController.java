@@ -27,7 +27,7 @@ public class ServiceController {
 
     @GetMapping("/Services")
     public List<Service> getAllServices() {
-        return serviceService.getAll();
+        return serviceService.getAllServices();
     }
 
     @PostMapping("Services/Create")
