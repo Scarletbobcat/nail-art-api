@@ -18,7 +18,7 @@ public class Appointment {
     private String name;
 
     @Column(name = "phoneNumber")
-    @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "Not a valid phone number")
+    @Pattern(regexp = "^(\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$", message = "Not a valid phone number")
     private String phoneNumber;
 
     @Column(name = "employeeId")
