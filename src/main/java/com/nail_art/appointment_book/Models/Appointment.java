@@ -3,7 +3,10 @@ package com.nail_art.appointment_book.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 import jakarta.validation.constraints.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -27,9 +30,12 @@ public class Appointment {
     @Column(name = "serviceId")
     private int serviceId;
 
-    @Column(name = "startDate")
-    private LocalDateTime startDate;
+    @Column(name = "date")
+    private String date;
 
-    @Column(name = "endDate")
-    private LocalDateTime endDate;
+    @Column(name = "startTime")
+    private String startTime;
+
+    @Column(name = "endTime")
+    private String endTime;
 }

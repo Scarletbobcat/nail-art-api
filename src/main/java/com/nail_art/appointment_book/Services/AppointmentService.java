@@ -5,6 +5,7 @@ import com.nail_art.appointment_book.Repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -14,6 +15,10 @@ public class AppointmentService {
     @Autowired
     public AppointmentService(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
+    }
+
+    public List<Appointment> getAppointmentsByDate(String date) {
+        return appointmentRepository.findByDate(date);
     }
 
     public Appointment getAppointmentById(int id) {

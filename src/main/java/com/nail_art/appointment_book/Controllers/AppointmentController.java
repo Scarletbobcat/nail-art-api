@@ -5,6 +5,8 @@ import com.nail_art.appointment_book.Services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,17 +28,22 @@ public class AppointmentController {
     }
 
     @GetMapping("/Appointments")
-    public List<Appointment> getAllServices() {
+    public List<Appointment> getAllAppointments() {
         return appointmentService.getAllAppointments();
     }
 
+    @GetMapping("/Appointments/date/{date}")
+    public List<Appointment> getAppointmentsByDate(@PathVariable String date) throws Exception {
+        return appointmentService.getAppointmentsByDate(date);
+    }
+
     @PostMapping("Appointments/Create")
-    public void createService(@RequestBody Appointment appointment){
+    public void createAppointment(@RequestBody Appointment appointment){
         appointmentService.createAppointment(appointment);
     }
 
     @DeleteMapping("Appointments/Delete/{id}")
-    public void deleteService(@PathVariable int id){
+    public void deleteAppointmentById(@PathVariable int id){
         appointmentService.deleteAppointmentById(id);
     }
 
