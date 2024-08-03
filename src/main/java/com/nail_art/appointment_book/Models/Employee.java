@@ -1,17 +1,18 @@
 package com.nail_art.appointment_book.Models;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
 @Data
-@Table(name = "Employees")
+@Document(collection = "Employees")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employeeId")
-    private int employeeID;
+    private String _id;
 
-    @Column(name = "employeeName")
-    private String employeeName;
+    private int id;
+
+    private String name;
+
+    private String color;
 }

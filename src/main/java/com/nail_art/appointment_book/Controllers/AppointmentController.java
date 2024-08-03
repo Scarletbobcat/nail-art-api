@@ -3,48 +3,30 @@ package com.nail_art.appointment_book.Controllers;
 import com.nail_art.appointment_book.Models.Appointment;
 import com.nail_art.appointment_book.Services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AppointmentController {
-    private final AppointmentService appointmentService;
-
     @Autowired
-    public AppointmentController(AppointmentService appointmentService) {
-        this.appointmentService = appointmentService;
-    }
+    AppointmentService appointmentService;
 
-    @GetMapping("/Appointments/{id}")
-    public Appointment getApppointmentById(@PathVariable int id) throws Exception {
-        Appointment appointment = appointmentService.getAppointmentById(id);
-        if (appointment != null) {
-            return appointment;
-        }
-        throw new ClassNotFoundException("Appointment not found");
-    }
-
-    @GetMapping("/Appointments")
-    public List<Appointment> getAllAppointments() {
+    @GetMapping("Appointments")
+    public List<Appointment> getAppointments() {
         return appointmentService.getAllAppointments();
     }
 
-    @GetMapping("/Appointments/date/{date}")
-    public List<Appointment> getAppointmentsByDate(@PathVariable String date) throws Exception {
+    @GetMapping("Appointments/{id}")
+    public Optional<Appointment> getAppointment(@PathVariable int id) {
+        return appointmentService.getAppointmentById(id);
+    }
+
+    @GetMapping("Appointments/date/{date}")
+    public List<Appointment> getAppointmentsByDate(@PathVariable String date) {
         return appointmentService.getAppointmentsByDate(date);
     }
-
-    @PostMapping("Appointments/Create")
-    public void createAppointment(@RequestBody Appointment appointment){
-        appointmentService.createAppointment(appointment);
-    }
-
-    @DeleteMapping("Appointments/Delete/{id}")
-    public void deleteAppointmentById(@PathVariable int id){
-        appointmentService.deleteAppointmentById(id);
-    }
-
 }
