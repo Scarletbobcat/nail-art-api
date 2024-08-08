@@ -24,4 +24,9 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByDate(String date) {
         return appointmentRepository.findByDate(date);
     }
+
+    public void createAppointment(Appointment appointment) {
+        appointment.setId((int) appointmentRepository.count() + 1);
+        appointmentRepository.save(appointment);
+    }
 }

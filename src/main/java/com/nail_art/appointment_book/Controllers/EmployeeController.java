@@ -4,6 +4,8 @@ import com.nail_art.appointment_book.Models.Employee;
 import com.nail_art.appointment_book.Services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,5 +18,10 @@ public class EmployeeController {
     @GetMapping("Employees")
     public List<Employee> getEmployees() {
         return employeeService.getAllEmployees();
+    }
+
+    @PostMapping("Employees/Create")
+    public void createEmployee(@RequestBody Employee employee) {
+        employeeService.createEmployee(employee);
     }
 }
