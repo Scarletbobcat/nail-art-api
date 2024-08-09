@@ -1,5 +1,6 @@
 package com.nail_art.appointment_book.Models;
 
+import jakarta.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -19,6 +20,7 @@ public class Appointment {
 
     private int employeeId;
 
+    @Pattern(regexp = "^(\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$", message = "Not a valid phone number")
     private String phoneNumber;
 
     private String startTime;
