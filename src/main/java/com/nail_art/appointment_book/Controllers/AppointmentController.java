@@ -32,4 +32,9 @@ public class AppointmentController {
     public void createAppointment(@RequestBody Appointment appointment) {
         appointmentService.createAppointment(appointment);
     }
+
+    @PutMapping("Appointments/Edit")
+    public void editAppointment(@RequestBody Appointment appointment) {
+        appointmentService.editAppointment(appointment);
+    }
 }

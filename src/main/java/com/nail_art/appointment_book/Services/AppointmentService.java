@@ -29,4 +29,18 @@ public class AppointmentService {
         appointment.setId((int) appointmentRepository.count() + 1);
         appointmentRepository.save(appointment);
     }
+
+    public void editAppointment(Appointment appointment) {
+        Optional<Appointment> tempAppointment = getAppointmentById(appointment.getId());
+        if (tempAppointment.isPresent()) {
+            tempAppointment.get().setServices(appointment.getServices());
+            tempAppointment.get().setDate(appointment.getDate());
+            tempAppointment.get().setName(appointment.getName());
+            tempAppointment.get().setEmployeeId(appointment.getEmployeeId());
+            tempAppointment.get().setStartTime(appointment.getStartTime());
+            tempAppointment.get().setEndTime(appointment.getEndTime());
+            tempAppointment.get().setPhoneNumber(appointment.getPhoneNumber());
+            appointmentRepository.save(tempAppointment.get());
+        }
+    }
 }
