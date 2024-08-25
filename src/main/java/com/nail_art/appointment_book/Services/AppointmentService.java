@@ -43,4 +43,13 @@ public class AppointmentService {
             appointmentRepository.save(tempAppointment.get());
         }
     }
+
+    public void deleteAppointment(Appointment appointment) {
+        Optional<Appointment> tempAppointment = getAppointmentById(appointment.getId());
+        if (tempAppointment.isPresent()) {
+            appointmentRepository.delete(tempAppointment.get());
+        } else {
+            throw new Error("Appointment not found");
+        }
+    }
 }

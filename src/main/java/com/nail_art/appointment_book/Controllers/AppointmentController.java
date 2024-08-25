@@ -37,4 +37,9 @@ public class AppointmentController {
     public void editAppointment(@RequestBody Appointment appointment) {
         appointmentService.editAppointment(appointment);
     }
+
+    @DeleteMapping("Appointments/Delete")
+    public void deleteAppointment(@RequestBody Appointment appointment) {
+        appointmentService.deleteAppointment(appointment);
+    }
 }
