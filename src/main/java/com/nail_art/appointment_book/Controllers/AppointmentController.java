@@ -42,4 +42,10 @@ public class AppointmentController {
     public void deleteAppointment(@RequestBody Appointment appointment) {
         appointmentService.deleteAppointment(appointment);
     }
+
+    @GetMapping("Appointments/Search/{phoneNumber}")
+    public List<Appointment> getAppointments(@PathVariable String phoneNumber) {
+       List<Appointment> appointments = appointmentService.getAppointmentsByPhoneNumber(phoneNumber);
+       return appointments;
+    }
 }

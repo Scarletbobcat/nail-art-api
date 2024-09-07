@@ -52,4 +52,8 @@ public class AppointmentService {
             throw new Error("Appointment not found");
         }
     }
+
+    public List<Appointment> getAppointmentsByPhoneNumber(String phoneNumber) {
+        return appointmentRepository.findByPhoneNumber(phoneNumber);
+    }
 }
