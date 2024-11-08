@@ -1,7 +1,7 @@
-package com.nail_art.appointment_book.Controllers;
+package com.nail_art.appointment_book.controllers;
 
-import com.nail_art.appointment_book.Models.Appointment;
-import com.nail_art.appointment_book.Services.AppointmentService;
+import com.nail_art.appointment_book.entities.Appointment;
+import com.nail_art.appointment_book.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

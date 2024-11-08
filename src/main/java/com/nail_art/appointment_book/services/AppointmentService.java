@@ -1,7 +1,7 @@
-package com.nail_art.appointment_book.Services;
+package com.nail_art.appointment_book.services;
 
-import com.nail_art.appointment_book.Models.Appointment;
-import com.nail_art.appointment_book.Repositories.AppointmentRepository;
+import com.nail_art.appointment_book.entities.Appointment;
+import com.nail_art.appointment_book.repositories.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

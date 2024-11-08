@@ -1,6 +1,6 @@
-package com.nail_art.appointment_book.Repositories;
+package com.nail_art.appointment_book.repositories;
 
-import com.nail_art.appointment_book.Models.Appointment;
+import com.nail_art.appointment_book.entities.Appointment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
