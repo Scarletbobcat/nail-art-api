@@ -6,6 +6,7 @@ import com.nail_art.appointment_book.Repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.nail_art.appointment_book.Exceptions.UserExceptions;
 
@@ -33,17 +34,9 @@ public class UserService {
     }
 
     public User findUserByUsername(String username) {
-        try{
-            User tempUser = userRepository.findByUsername(username);
-            if (tempUser == null) {
-                throw new UserExceptions.UserNotFoundException(
-                        "User with username '" + username + "' not found."
-                );
-            }
-            return tempUser;
-        } catch (Exception e){
-            throw e;
-        }
+        User tempUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return tempUser;
     }
 
     public List<User> allUsers() {
