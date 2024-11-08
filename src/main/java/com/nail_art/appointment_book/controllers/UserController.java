@@ -1,7 +1,7 @@
-package com.nail_art.appointment_book.Controllers;
+package com.nail_art.appointment_book.controllers;
 
-import com.nail_art.appointment_book.Models.User;
-import com.nail_art.appointment_book.Services.UserService;
+import com.nail_art.appointment_book.entities.User;
+import com.nail_art.appointment_book.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

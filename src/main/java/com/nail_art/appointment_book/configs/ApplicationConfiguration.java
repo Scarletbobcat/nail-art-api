@@ -1,7 +1,7 @@
-package com.nail_art.appointment_book.Configs;
+package com.nail_art.appointment_book.configs;
 
 
-import com.nail_art.appointment_book.Repositories.UserRepository;
+import com.nail_art.appointment_book.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

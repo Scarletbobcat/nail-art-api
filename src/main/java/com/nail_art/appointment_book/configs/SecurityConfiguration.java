@@ -1,4 +1,4 @@
-package com.nail_art.appointment_book.Configs;
+package com.nail_art.appointment_book.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,11 +1,11 @@
-package com.nail_art.appointment_book.Controllers;
+package com.nail_art.appointment_book.controllers;
 
-import com.nail_art.appointment_book.Models.User;
+import com.nail_art.appointment_book.entities.User;
 import com.nail_art.appointment_book.dtos.LoginUserDto;
 import com.nail_art.appointment_book.dtos.RegisterUserDto;
 import com.nail_art.appointment_book.responses.LoginResponse;
-import com.nail_art.appointment_book.Services.AuthenticationService;
-import com.nail_art.appointment_book.Services.JwtService;
+import com.nail_art.appointment_book.services.AuthenticationService;
+import com.nail_art.appointment_book.services.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

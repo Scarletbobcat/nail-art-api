@@ -1,4 +1,4 @@
-package com.nail_art.appointment_book.Models;
+package com.nail_art.appointment_book.entities;
 
 import jakarta.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;

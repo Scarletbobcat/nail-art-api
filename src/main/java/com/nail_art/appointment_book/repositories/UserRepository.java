@@ -1,6 +1,6 @@
-package com.nail_art.appointment_book.Repositories;
+package com.nail_art.appointment_book.repositories;
 
-import com.nail_art.appointment_book.Models.User;
+import com.nail_art.appointment_book.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

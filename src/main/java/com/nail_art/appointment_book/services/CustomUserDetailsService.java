@@ -1,14 +1,12 @@
-package com.nail_art.appointment_book.Services;
+package com.nail_art.appointment_book.services;
 
-import com.nail_art.appointment_book.Models.User;
-import com.nail_art.appointment_book.Repositories.UserRepository;
+import com.nail_art.appointment_book.entities.User;
+import com.nail_art.appointment_book.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

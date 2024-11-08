@@ -1,9 +1,9 @@
-package com.nail_art.appointment_book.Services;
+package com.nail_art.appointment_book.services;
 
 import com.nail_art.appointment_book.dtos.LoginUserDto;
 import com.nail_art.appointment_book.dtos.RegisterUserDto;
-import com.nail_art.appointment_book.Models.User;
-import com.nail_art.appointment_book.Repositories.UserRepository;
+import com.nail_art.appointment_book.entities.User;
+import com.nail_art.appointment_book.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +28,9 @@ public class AuthenticationService {
     }
 
     public User signup(RegisterUserDto input) {
+        if (userRepository.findByUsername(input.getUsername()).isPresent()) {
+            throw new RuntimeException("User with username '" + input.getUsername() + "' already exists.");
+        }
         User user = new User();
         user.setUsername(input.getUsername());
         user.setPassword(passwordEncoder.encode(input.getPassword()));

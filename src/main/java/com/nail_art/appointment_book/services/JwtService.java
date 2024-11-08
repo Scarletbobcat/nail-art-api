@@ -1,4 +1,4 @@
-package com.nail_art.appointment_book.Services;
+package com.nail_art.appointment_book.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
