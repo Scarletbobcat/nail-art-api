@@ -13,7 +13,10 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAll();
+        System.out.println(employees);
+
+        return employees;
     }
 
     public void createEmployee(Employee employee) {

@@ -21,7 +21,6 @@ public class EmployeeController {
 
     @GetMapping("Employees")
     public ResponseEntity<List<Employee>> getEmployees() {
-        log.info("Endpoint /Employees hit");
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 

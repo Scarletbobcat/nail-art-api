@@ -2,8 +2,6 @@ package com.nail_art.appointment_book.Controllers;
 
 import com.nail_art.appointment_book.Models.User;
 import com.nail_art.appointment_book.Services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,7 +15,6 @@ import java.util.List;
 @RequestMapping("/users")
 @RestController
 public class UserController {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 
     public UserController(UserService userService) {
