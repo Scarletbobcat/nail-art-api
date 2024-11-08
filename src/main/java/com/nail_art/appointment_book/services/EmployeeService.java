@@ -19,8 +19,8 @@ public class EmployeeService {
         return employees;
     }
 
-    public void createEmployee(Employee employee) {
+    public Employee createEmployee(Employee employee) {
         employee.setId((int) employeeRepository.count() + 1);
-        employeeRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 }

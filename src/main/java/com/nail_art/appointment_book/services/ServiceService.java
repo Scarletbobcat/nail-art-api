@@ -15,8 +15,8 @@ public class ServiceService {
         return serviceRepository.findAll();
     }
 
-    public void createService(com.nail_art.appointment_book.entities.Service service) {
+    public com.nail_art.appointment_book.entities.Service createService(com.nail_art.appointment_book.entities.Service service) {
         service.setId((int) serviceRepository.count() + 1);
-        serviceRepository.save(service);
+        return serviceRepository.save(service);
     }
 }

@@ -25,12 +25,12 @@ public class AppointmentService {
         return appointmentRepository.findByDate(date);
     }
 
-    public void createAppointment(Appointment appointment) {
+    public Appointment createAppointment(Appointment appointment) {
         appointment.setId((int) appointmentRepository.count() + 1);
-        appointmentRepository.save(appointment);
+        return appointmentRepository.save(appointment);
     }
 
-    public void editAppointment(Appointment appointment) {
+    public Optional<Appointment> editAppointment(Appointment appointment) {
         Optional<Appointment> tempAppointment = getAppointmentById(appointment.getId());
         if (tempAppointment.isPresent()) {
             tempAppointment.get().setServices(appointment.getServices());
@@ -40,17 +40,18 @@ public class AppointmentService {
             tempAppointment.get().setStartTime(appointment.getStartTime());
             tempAppointment.get().setEndTime(appointment.getEndTime());
             tempAppointment.get().setPhoneNumber(appointment.getPhoneNumber());
-            appointmentRepository.save(tempAppointment.get());
+            return Optional.of(appointmentRepository.save(tempAppointment.get()));
         }
+        return Optional.empty();
     }
 
-    public void deleteAppointment(Appointment appointment) {
+    public Boolean deleteAppointment(Appointment appointment) {
         Optional<Appointment> tempAppointment = getAppointmentById(appointment.getId());
         if (tempAppointment.isPresent()) {
             appointmentRepository.delete(tempAppointment.get());
-        } else {
-            throw new Error("Appointment not found");
+            return true;
         }
+        return false;
     }
 
     public List<Appointment> getAppointmentsByPhoneNumber(String phoneNumber) {

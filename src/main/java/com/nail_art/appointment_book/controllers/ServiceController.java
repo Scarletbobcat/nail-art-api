@@ -3,25 +3,24 @@ package com.nail_art.appointment_book.controllers;
 import com.nail_art.appointment_book.entities.Service;
 import com.nail_art.appointment_book.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/services")
 @RestController
 public class ServiceController {
     @Autowired
     private ServiceService serviceService;
 
-    @GetMapping("Services")
-    public List<Service> getServices() {
-        return serviceService.getAllServices();
+    @GetMapping("/")
+    public ResponseEntity<List<Service>> getServices() {
+        return ResponseEntity.ok(serviceService.getAllServices());
     }
 
-    @PostMapping("Services/Create")
-    public void createService(@RequestBody Service service) {
-        serviceService.createService(service);
+    @PostMapping("/create")
+    public ResponseEntity<Service> createService(@RequestBody Service service) {
+        return ResponseEntity.ok(serviceService.createService(service));
     }
 }

@@ -2,50 +2,65 @@ package com.nail_art.appointment_book.controllers;
 
 import com.nail_art.appointment_book.entities.Appointment;
 import com.nail_art.appointment_book.services.AppointmentService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("/appointments")
 @RestController
 public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
-    @GetMapping("Appointments")
-    public List<Appointment> getAppointments() {
-        return appointmentService.getAllAppointments();
+    @GetMapping("/")
+    public ResponseEntity<List<Appointment>> getAppointments() {
+        return ResponseEntity.ok(appointmentService.getAllAppointments());
     }
 
-    @GetMapping("Appointments/{id}")
-    public Optional<Appointment> getAppointment(@PathVariable int id) {
-        return appointmentService.getAppointmentById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Appointment>> getAppointment(@PathVariable int id) {
+        return ResponseEntity.ok(appointmentService.getAppointmentById(id));
     }
 
-    @GetMapping("Appointments/date/{date}")
-    public List<Appointment> getAppointmentsByDate(@PathVariable String date) {
-        return appointmentService.getAppointmentsByDate(date);
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<Appointment>> getAppointmentsByDate(@PathVariable String date) {
+        return ResponseEntity.ok(appointmentService.getAppointmentsByDate(date));
     }
 
-    @PostMapping("Appointments/Create")
-    public void createAppointment(@RequestBody Appointment appointment) {
-        appointmentService.createAppointment(appointment);
+    @PostMapping("/create")
+    public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment) {
+        Appointment appt = appointmentService.createAppointment(appointment);
+
+        return new ResponseEntity<>(appt, HttpStatus.CREATED);
     }
 
-    @PutMapping("Appointments/Edit")
-    public void editAppointment(@RequestBody Appointment appointment) {
-        appointmentService.editAppointment(appointment);
+    @PutMapping("/edit")
+    public ResponseEntity<Optional<Appointment>> editAppointment(@RequestBody Appointment appointment) {
+        Optional<Appointment> appt = appointmentService.editAppointment(appointment);
+        if (appt.isEmpty()) {
+            return new ResponseEntity<>(Optional.of(appointment), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(appointmentService.getAppointmentById(appointment.getId()), HttpStatus.OK);
     }
 
-    @DeleteMapping("Appointments/Delete")
-    public void deleteAppointment(@RequestBody Appointment appointment) {
-        appointmentService.deleteAppointment(appointment);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Appointment> deleteAppointment(@RequestBody Appointment appointment) {
+        boolean isDeleted = appointmentService.deleteAppointment(appointment);
+        if (isDeleted) {
+            return new ResponseEntity<>(appointment, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(appointment, HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("Appointments/Search/{phoneNumber}")
-    public List<Appointment> getAppointments(@PathVariable String phoneNumber) {
+    @GetMapping("/search/{phoneNumber}")
+    public ResponseEntity<List<Appointment>> getAppointments(@PathVariable String phoneNumber) {
        List<Appointment> appointments = appointmentService.getAppointmentsByPhoneNumber(phoneNumber);
-       return appointments;
+       return ResponseEntity.ok(appointments);
     }
 }
