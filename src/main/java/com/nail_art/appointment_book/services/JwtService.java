@@ -63,6 +63,9 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("jti", UUID.randomUUID().toString()); // Add a unique identifier to the claims
 
+        // removes all previous refresh tokens
+        refreshTokenRepository.deleteRefreshTokensByUsername(userDetails.getUsername());
+
         refreshToken.setToken(buildToken(claims, userDetails, refreshExpiration));
         refreshToken.setExpiryDate(Instant.now().plusMillis(refreshExpiration));
         refreshToken.setUsername(userDetails.getUsername());
