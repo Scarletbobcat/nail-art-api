@@ -1,14 +1,19 @@
 package com.nail_art.appointment_book.services;
 
+import com.nail_art.appointment_book.entities.RefreshToken;
+import com.nail_art.appointment_book.repositories.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +27,15 @@ public class JwtService {
 
     @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
+
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    public JwtService(RefreshTokenRepository refreshTokenRepository) {
+        this.refreshTokenRepository = refreshTokenRepository;
+    }
+
+    @Value("${JWT_REFRESH_EXPIRATION}")
+    private long refreshExpiration;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,6 +58,29 @@ public class JwtService {
         return jwtExpiration;
     }
 
+    public String generateRefreshToken(UserDetails userDetails) {
+        RefreshToken refreshToken = new RefreshToken();
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("jti", UUID.randomUUID().toString()); // Add a unique identifier to the claims
+
+        refreshToken.setToken(buildToken(claims, userDetails, refreshExpiration));
+        refreshToken.setExpiryDate(Instant.now().plusMillis(refreshExpiration));
+        refreshToken.setUsername(userDetails.getUsername());
+        refreshTokenRepository.save(refreshToken);
+        return refreshToken.getToken();
+    }
+
+    public boolean validateRefreshToken(String token) {
+        return refreshTokenRepository.findByToken(token)
+                .map(refreshToken -> refreshToken.getExpiryDate().isAfter(Instant.now()))
+                .orElse(false);
+    }
+
+    public void deleteRefreshToken(String token) {
+        refreshTokenRepository.findByToken(token).ifPresent(refreshTokenRepository::delete);
+    }
+
+
     private String buildToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails,
@@ -64,7 +101,7 @@ public class JwtService {
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 

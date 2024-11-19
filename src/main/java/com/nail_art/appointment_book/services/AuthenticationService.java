@@ -6,6 +6,7 @@ import com.nail_art.appointment_book.entities.User;
 import com.nail_art.appointment_book.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,16 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
     public AuthenticationService(
             UserRepository userRepository,
             AuthenticationManager authenticationManager,
-            PasswordEncoder passwordEncoder
-    ) {
+            PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public User signup(RegisterUserDto input) {
@@ -47,5 +49,17 @@ public class AuthenticationService {
 
         return userRepository.findByUsername(input.getUsername())
                 .orElseThrow();
+    }
+
+    public String generateRefreshToken(UserDetails userDetails) {
+        return jwtService.generateRefreshToken(userDetails);
+    }
+
+    public boolean validateRefreshToken(String token) {
+        return jwtService.validateRefreshToken(token);
+    }
+
+    public void deleteRefreshToken(String token) {
+        jwtService.deleteRefreshToken(token);
     }
 }

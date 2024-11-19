@@ -1,10 +1,12 @@
 package com.nail_art.appointment_book.configs;
 
 import com.nail_art.appointment_book.services.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -68,8 +70,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
             filterChain.doFilter(request, response);
-        } catch (Exception exception) {
-            handlerExceptionResolver.resolveException(request, response, null, exception);
+        } catch(ExpiredJwtException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("JWT token is expired");
+        }
+        catch (Exception exception) {
+//            handlerExceptionResolver.resolveException(request, response, null, exception);
+            System.out.println(exception.getMessage());
         }
     }
 }

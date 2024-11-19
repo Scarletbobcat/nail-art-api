@@ -14,7 +14,6 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
-        System.out.println(employees);
 
         return employees;
     }
