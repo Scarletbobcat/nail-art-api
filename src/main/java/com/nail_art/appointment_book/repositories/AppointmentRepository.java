@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends MongoRepository<Appointment, String> {
-    Optional<Appointment> findById(int id);
+    Optional<Appointment> findById(long id);
 
     List<Appointment> findByDate(String date);
 

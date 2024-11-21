@@ -13,11 +13,11 @@ public class Appointment {
     @Id
     private String _id;
 
-    private int id;
+    private long id;
 
     private String name;
 
-    private int employeeId;
+    private long employeeId;
 
     @Pattern(regexp = "^(\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$", message = "Not a valid phone number")
     private String phoneNumber;
@@ -30,11 +30,11 @@ public class Appointment {
 
     private List<String> services;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,11 +46,11 @@ public class Appointment {
         this.name = name;
     }
 
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 

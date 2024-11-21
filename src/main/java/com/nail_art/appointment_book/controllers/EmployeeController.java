@@ -27,4 +27,9 @@ public class EmployeeController {
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         return ResponseEntity.ok(employeeService.createEmployee(employee));
     }
+
+    @PutMapping("/edit")
+    public ResponseEntity<Employee> editEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.editEmployee(employee));
+    }
 }

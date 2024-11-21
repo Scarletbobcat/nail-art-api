@@ -12,12 +12,14 @@ import java.util.Optional;
 public class AppointmentService {
     @Autowired
     AppointmentRepository appointmentRepository;
+    @Autowired
+    private CounterService counterService;
 
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
 
-    public Optional<Appointment> getAppointmentById(int id) {
+    public Optional<Appointment> getAppointmentById(long id) {
         return appointmentRepository.findById(id);
     }
 
@@ -26,7 +28,8 @@ public class AppointmentService {
     }
 
     public Appointment createAppointment(Appointment appointment) {
-        appointment.setId((int) appointmentRepository.count() + 1);
+        long id = counterService.getNextSequence("Appointments");
+        appointment.setId(id);
         return appointmentRepository.save(appointment);
     }
 

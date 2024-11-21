@@ -10,17 +10,17 @@ public class Employee {
     @Id
     private String _id;
 
-    private int id;
+    private long id;
 
     private String name;
 
     private String color;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

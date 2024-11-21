@@ -10,13 +10,15 @@ import java.util.List;
 public class ServiceService {
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private CounterService counterService;
 
     public List<com.nail_art.appointment_book.entities.Service> getAllServices() {
         return serviceRepository.findAll();
     }
 
     public com.nail_art.appointment_book.entities.Service createService(com.nail_art.appointment_book.entities.Service service) {
-        service.setId((int) serviceRepository.count() + 1);
+        service.setId(counterService.getNextSequence("Services"));
         return serviceRepository.save(service);
     }
 }
