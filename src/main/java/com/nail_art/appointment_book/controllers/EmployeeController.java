@@ -32,4 +32,14 @@ public class EmployeeController {
     public ResponseEntity<Employee> editEmployee(@RequestBody Employee employee) {
         return ResponseEntity.ok(employeeService.editEmployee(employee));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Employee> deleteEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.deleteEmployee(employee));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Employee[]> getEmployeeByName(@PathVariable String name) {
+        return ResponseEntity.ok(employeeService.getEmployeeByName(name));
+    }
 }

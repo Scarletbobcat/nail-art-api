@@ -34,4 +34,17 @@ public class EmployeeService {
         tempEmp.setName(employee.getName());
         return employeeRepository.save(tempEmp);
     }
+
+    public Employee deleteEmployee(Employee employee) {
+        Employee tempEmp = employeeRepository.findById(employee.getId()).orElse(null);
+        if (tempEmp == null) {
+            return null;
+        }
+        employeeRepository.delete(tempEmp);
+        return tempEmp;
+    }
+
+    public Employee[] getEmployeeByName(String name) {
+        return employeeRepository.findAllByName(name);
+    }
 }

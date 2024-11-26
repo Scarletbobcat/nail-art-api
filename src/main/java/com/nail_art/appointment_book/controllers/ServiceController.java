@@ -23,4 +23,20 @@ public class ServiceController {
     public ResponseEntity<Service> createService(@RequestBody Service service) {
         return ResponseEntity.ok(serviceService.createService(service));
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Service[]> getServiceByName(@PathVariable String name) {
+        name = name.replace("%20", " ");
+        return ResponseEntity.ok(serviceService.getServiceByName(name));
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<Service> editService(@RequestBody Service service) {
+        return ResponseEntity.ok(serviceService.editService(service));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Service> deleteService(@RequestBody Service service) {
+        return ResponseEntity.ok(serviceService.deleteService(service));
+    }
 }
