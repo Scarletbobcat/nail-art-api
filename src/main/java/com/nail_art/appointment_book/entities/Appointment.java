@@ -1,5 +1,7 @@
 package com.nail_art.appointment_book.entities;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;
 import lombok.Data;
@@ -15,19 +17,26 @@ public class Appointment {
 
     private long id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private long employeeId;
 
     @Pattern(regexp = "^(\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$", message = "Not a valid phone number")
+    @NotNull
     private String phoneNumber;
 
+    @NotNull
     private String startTime;
 
+    @NotNull
     private String endTime;
 
+    @NotNull
     private String date;
 
+    @NotEmpty
     private List<String> services;
 
     public long getId() {

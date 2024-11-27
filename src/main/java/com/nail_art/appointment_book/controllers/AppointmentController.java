@@ -2,13 +2,17 @@ package com.nail_art.appointment_book.controllers;
 
 import com.nail_art.appointment_book.entities.Appointment;
 import com.nail_art.appointment_book.services.AppointmentService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequestMapping("/appointments")
@@ -33,7 +37,12 @@ public class AppointmentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment) {
+    public ResponseEntity<?> createAppointment(@Valid @RequestBody Appointment appointment, BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            result.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
         Appointment appt = appointmentService.createAppointment(appointment);
 
         return new ResponseEntity<>(appt, HttpStatus.CREATED);
